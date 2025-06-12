@@ -1,11 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace TestTask
 {
     public class ReadOnlyStream : IReadOnlyStream
     {
-        private Stream _localStream;
+        private StreamReader _localReader;
 
         /// <summary>
         /// Конструктор класса. 
@@ -17,8 +18,7 @@ namespace TestTask
         {
             IsEof = true;
 
-            // TODO : Заменить на создание реального стрима для чтения файла!
-            _localStream = null;
+            _localReader = new StreamReader(File.OpenRead(fileFullPath), Encoding.UTF8);
         }
                 
         /// <summary>
@@ -26,7 +26,7 @@ namespace TestTask
         /// </summary>
         public bool IsEof
         {
-            get; // TODO : Заполнять данный флаг при достижении конца файла/стрима при чтении
+            get;
             private set;
         }
 
@@ -38,8 +38,17 @@ namespace TestTask
         /// <returns>Считанный символ.</returns>
         public char ReadNextChar()
         {
-            // TODO : Необходимо считать очередной символ из _localStream
-            throw new NotImplementedException();
+
+            if (IsEof) {
+                throw new InvalidOperationException("Попытка чтения после достижения конца файла");
+            }
+            char nextChar = (char) _localReader.Read();
+
+            if (_localReader.EndOfStream) {
+                IsEof = true;
+            }
+
+            return nextChar;
         }
 
         /// <summary>
@@ -47,14 +56,22 @@ namespace TestTask
         /// </summary>
         public void ResetPositionToStart()
         {
-            if (_localStream == null)
+            if (_localReader == null)
             {
                 IsEof = true;
                 return;
             }
 
-            _localStream.Position = 0;
+            _localReader.BaseStream.Position = 0;
             IsEof = false;
+        }
+
+        /// <summary>
+        /// Реализ
+        /// </summary>
+        public void Dispose()
+        {
+            _localReader.Dispose();
         }
     }
 }
