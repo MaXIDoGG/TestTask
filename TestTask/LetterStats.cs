@@ -8,12 +8,12 @@
         /// <summary>
         /// Буква/Пара букв для учёта статистики.
         /// </summary>
-        public string Letter { get; set; }
+        public string Letter;
 
         /// <summary>
         /// Кол-во вхождений буквы/пары.
         /// </summary>
-        public int Count { get; set; }
+        public int Count;
 
         public LetterStats(string letter, int count = 1)
         {

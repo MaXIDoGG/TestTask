@@ -9,16 +9,16 @@
         /// <summary>
         /// Строка со всеми буквами.
         /// </summary>
-        public static string Alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz";
+        public static char[] AlphabetChars = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz".ToCharArray();
 
         /// <summary>
         /// Строка со всеми согласными буквами.
         /// </summary>
-        public static string Consonants = "бвгджзйклмнпрстфхцчшщbcdfghjklmnpqrstvwxz";
+        public static char[] Consonants = "бвгджзйклмнпрстфхцчшщbcdfghjklmnpqrstvwxz".ToCharArray();
 
         /// <summary>
         /// Строка со всеми гласными буквами.
         /// </summary>
-        public static string Vowel = "аеёиоуыэюяaeiouy";
+        public static char[] Vowel = "аеёиоуыэюяaeiouy".ToCharArray();
     }
 }

@@ -151,15 +151,13 @@ namespace TestTask
         /// <param name="letters">Коллекция со статистикой</param>
         private static void PrintStatistic(IEnumerable<LetterStats> letters)
         {
-            // TODO : Выводить на экран статистику. Выводить предварительно отсортировав по алфавиту!
-            List<LetterStats> sortLetters = letters.OrderBy(l => l.Letter, StringComparer.OrdinalIgnoreCase).ToList();
-            int sumResult = 0;
+            var sortLetters = letters.OrderBy(l => l.Letter, StringComparer.OrdinalIgnoreCase);
             foreach (var letter in sortLetters)
             {
                 Console.WriteLine($"{letter.Letter} : {letter.Count}");
-                sumResult += letter.Count;
             }
-            Console.WriteLine($"ИТОГО : {sumResult}");
+            int sum = sortLetters.Sum(l => l.Count);
+            Console.WriteLine($"ИТОГО : {sum}");
         }
 
         /// <summary>
@@ -170,7 +168,5 @@ namespace TestTask
         {
             letterStats.Count++;
         }
-
-
     }
 }
